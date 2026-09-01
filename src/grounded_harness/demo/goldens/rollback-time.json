@@ -1,0 +1,97 @@
+{
+  "task": "How long does a rollback take?",
+  "expected_status": "completed",
+  "must_be_grounded": [
+    "90 seconds"
+  ],
+  "max_steps_tolerance": 0,
+  "run": {
+    "task": "How long does a rollback take?",
+    "status": "completed",
+    "status_detail": "",
+    "final_text": "Rollback is one click and takes about 90 seconds.",
+    "resumed_steps": 0,
+    "budget": {
+      "steps": 3,
+      "cost_usd": 0.0,
+      "cost_known": false,
+      "output_tokens": 0,
+      "max_steps": 6,
+      "max_cost_usd": null,
+      "max_output_tokens": null
+    },
+    "steps": [
+      {
+        "index": 0,
+        "turn": {
+          "text": "",
+          "stop_reason": "tool_use",
+          "model": "mock",
+          "input_tokens": null,
+          "output_tokens": null,
+          "latency_s": null,
+          "tool_calls": [
+            {
+              "id": "g2-s",
+              "name": "search",
+              "input": {
+                "query": "rollback deploy",
+                "k": 2
+              }
+            }
+          ]
+        },
+        "tool_results": [
+          {
+            "tool_call_id": "g2-s",
+            "name": "search",
+            "content": "{\n  \"abstained\": false,\n  \"hits\": [\n    {\n      \"citation_id\": \"internal/engineering/deploy-process.md#rollback\",\n      \"title\": \"Deploy Process\",\n      \"heading\": \"Rollback\",\n      \"score\": 8.73,\n      \"coverage\": 1.0,\n      \"snippet\": \"## >>Rollback<<\\n\\n>>Rollback<< is one click in the >>deploy<< dashboard and takes about \u2026 \",\n      \"lines\": [\n        11,\n        16\n      ]\n    },\n    {\n      \"citation_id\": \"internal/engineering/deploy-process.md#deploy-process\",\n      \"title\": \"Deploy Process\",\n      \"heading\": \"Deploy Process\",\n      \"score\": 3.487,\n      \"coverage\": 1.0,\n      \"snippet\": \"# >>Deploy<< Process\\n\\nDeploys go out through the pipeline, never by hand. Merge \u2026 \",\n      \"lines\": [\n        6,\n        10\n      ]\n    }\n  ]\n}",
+            "is_error": false
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "turn": {
+          "text": "",
+          "stop_reason": "tool_use",
+          "model": "mock",
+          "input_tokens": null,
+          "output_tokens": null,
+          "latency_s": null,
+          "tool_calls": [
+            {
+              "id": "g2-r",
+              "name": "read_note",
+              "input": {
+                "citation": "internal/engineering/deploy-process.md",
+                "section_only": false
+              }
+            }
+          ]
+        },
+        "tool_results": [
+          {
+            "tool_call_id": "g2-r",
+            "name": "read_note",
+            "content": "{\n  \"found\": true,\n  \"path\": \"internal/engineering/deploy-process.md\",\n  \"title\": \"Deploy Process\",\n  \"tags\": [\n    \"engineering\",\n    \"process\"\n  ],\n  \"frontmatter\": {\n    \"title\": \"Deploy Process\"\n  },\n  \"sections\": [\n    {\n      \"citation_id\": \"internal/engineering/deploy-process.md#deploy-process\",\n      \"heading\": \"Deploy Process\",\n      \"lines\": [\n        6,\n        10\n      ],\n      \"text\": \"# Deploy Process\\n\\nDeploys go out through the pipeline, never by hand. Merge to `main` triggers\\nbuild, test, and a staged rollout: 5% canary for 30 minutes, then full.\"\n    },\n    {\n      \"citation_id\": \"internal/engineering/deploy-process.md#rollback\",\n      \"heading\": \"Rollback\",\n      \"lines\": [\n        11,\n        16\n      ],\n      \"text\": \"## Rollback\\n\\nRollback is one click in the deploy dashboard and takes about 90 seconds.\\nIf the canary error rate doubles, rollback happens automatically. Incidents\\nfollow the [[incident-runbook]].\"\n    },\n    {\n      \"citation_id\": \"internal/engineering/deploy-process.md#freeze-windows\",\n      \"heading\": \"Freeze windows\",\n      \"lines\": [\n        17,\n        20\n      ],\n      \"text\": \"## Freeze windows\\n\\nNo deploys after 15:00 on Fridays, or during the Black Friday freeze\\n(the last full week of November).\"\n    }\n  ]\n}",
+            "is_error": false
+          }
+        ]
+      },
+      {
+        "index": 2,
+        "turn": {
+          "text": "Rollback is one click and takes about 90 seconds.",
+          "stop_reason": "end_turn",
+          "model": "mock",
+          "input_tokens": null,
+          "output_tokens": null,
+          "latency_s": null,
+          "tool_calls": []
+        },
+        "tool_results": []
+      }
+    ]
+  }
+}

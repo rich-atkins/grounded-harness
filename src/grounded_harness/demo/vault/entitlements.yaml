@@ -1,0 +1,10 @@
+# Demo entitlements for the ACME vault.
+# Semantics: deny wins, then allow, then default-deny.
+profiles:
+  exec:
+    allow: ["**"]
+  staff:
+    allow: ["public/**", "internal/**"]
+    deny: ["restricted/**"]
+  contractor:
+    allow: ["public/**"]

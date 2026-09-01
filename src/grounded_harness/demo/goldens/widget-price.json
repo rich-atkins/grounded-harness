@@ -1,0 +1,97 @@
+{
+  "task": "What does Widget Pro cost?",
+  "expected_status": "completed",
+  "must_be_grounded": [
+    "\u00a3249"
+  ],
+  "max_steps_tolerance": 0,
+  "run": {
+    "task": "What does Widget Pro cost?",
+    "status": "completed",
+    "status_detail": "",
+    "final_text": "Widget Pro lists at \u00a3249 per unit.",
+    "resumed_steps": 0,
+    "budget": {
+      "steps": 3,
+      "cost_usd": 0.0,
+      "cost_known": false,
+      "output_tokens": 0,
+      "max_steps": 6,
+      "max_cost_usd": null,
+      "max_output_tokens": null
+    },
+    "steps": [
+      {
+        "index": 0,
+        "turn": {
+          "text": "",
+          "stop_reason": "tool_use",
+          "model": "mock",
+          "input_tokens": null,
+          "output_tokens": null,
+          "latency_s": null,
+          "tool_calls": [
+            {
+              "id": "g1-s",
+              "name": "search",
+              "input": {
+                "query": "widget pro pricing",
+                "k": 2
+              }
+            }
+          ]
+        },
+        "tool_results": [
+          {
+            "tool_call_id": "g1-s",
+            "name": "search",
+            "content": "{\n  \"abstained\": false,\n  \"hits\": [\n    {\n      \"citation_id\": \"public/products/widget-pro.md#pricing\",\n      \"title\": \"Widget Pro\",\n      \"heading\": \"Pricing\",\n      \"score\": 9.599,\n      \"coverage\": 1.0,\n      \"snippet\": \"## >>Pricing<<\\n\\n>>Widget<< >>Pro<< lists at \u00a3249 per unit, with volume discounts from \u2026 \",\n      \"lines\": [\n        11,\n        15\n      ]\n    },\n    {\n      \"citation_id\": \"public/products/widget-pro.md#widget-pro\",\n      \"title\": \"Widget Pro\",\n      \"heading\": \"Widget Pro\",\n      \"score\": 5.529,\n      \"coverage\": 1.0,\n      \"snippet\": \"# >>Widget<< >>Pro<<\\n\\n>>Widget<< >>Pro<< is ACME's flagship industrial >>widget<<, rated for \u2026 \",\n      \"lines\": [\n        6,\n        10\n      ]\n    }\n  ]\n}",
+            "is_error": false
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "turn": {
+          "text": "",
+          "stop_reason": "tool_use",
+          "model": "mock",
+          "input_tokens": null,
+          "output_tokens": null,
+          "latency_s": null,
+          "tool_calls": [
+            {
+              "id": "g1-r",
+              "name": "read_note",
+              "input": {
+                "citation": "public/products/widget-pro.md",
+                "section_only": false
+              }
+            }
+          ]
+        },
+        "tool_results": [
+          {
+            "tool_call_id": "g1-r",
+            "name": "read_note",
+            "content": "{\n  \"found\": true,\n  \"path\": \"public/products/widget-pro.md\",\n  \"title\": \"Widget Pro\",\n  \"tags\": [\n    \"product\",\n    \"widget\"\n  ],\n  \"frontmatter\": {\n    \"title\": \"Widget Pro\"\n  },\n  \"sections\": [\n    {\n      \"citation_id\": \"public/products/widget-pro.md#widget-pro\",\n      \"heading\": \"Widget Pro\",\n      \"lines\": [\n        6,\n        10\n      ],\n      \"text\": \"# Widget Pro\\n\\nWidget Pro is ACME's flagship industrial widget, rated for continuous duty at\\nup to 4,000 RPM. It ships with a five-year warranty.\"\n    },\n    {\n      \"citation_id\": \"public/products/widget-pro.md#pricing\",\n      \"heading\": \"Pricing\",\n      \"lines\": [\n        11,\n        15\n      ],\n      \"text\": \"## Pricing\\n\\nWidget Pro lists at \u00a3249 per unit, with volume discounts from 50 units.\\nEducation customers get 15% off list price.\"\n    },\n    {\n      \"citation_id\": \"public/products/widget-pro.md#support\",\n      \"heading\": \"Support\",\n      \"lines\": [\n        16,\n        19\n      ],\n      \"text\": \"## Support\\n\\nSupport hours are 09:00\u201317:00 UK time, Monday to Friday. Enterprise customers\\nhave a 4-hour response SLA. See [[gadget-lite]] for the consumer line.\"\n    }\n  ]\n}",
+            "is_error": false
+          }
+        ]
+      },
+      {
+        "index": 2,
+        "turn": {
+          "text": "Widget Pro lists at \u00a3249 per unit.",
+          "stop_reason": "end_turn",
+          "model": "mock",
+          "input_tokens": null,
+          "output_tokens": null,
+          "latency_s": null,
+          "tool_calls": []
+        },
+        "tool_results": []
+      }
+    ]
+  }
+}

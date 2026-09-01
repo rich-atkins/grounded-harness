@@ -1,0 +1,99 @@
+{
+  "task": "What colours does Gadget Lite come in?",
+  "expected_status": "completed",
+  "must_be_grounded": [
+    "slate",
+    "moss",
+    "clay"
+  ],
+  "max_steps_tolerance": 0,
+  "run": {
+    "task": "What colours does Gadget Lite come in?",
+    "status": "completed",
+    "status_detail": "",
+    "final_text": "Gadget Lite comes in slate, moss, and clay.",
+    "resumed_steps": 0,
+    "budget": {
+      "steps": 3,
+      "cost_usd": 0.0,
+      "cost_known": false,
+      "output_tokens": 0,
+      "max_steps": 6,
+      "max_cost_usd": null,
+      "max_output_tokens": null
+    },
+    "steps": [
+      {
+        "index": 0,
+        "turn": {
+          "text": "",
+          "stop_reason": "tool_use",
+          "model": "mock",
+          "input_tokens": null,
+          "output_tokens": null,
+          "latency_s": null,
+          "tool_calls": [
+            {
+              "id": "g3-s",
+              "name": "search",
+              "input": {
+                "query": "gadget lite colours",
+                "k": 2
+              }
+            }
+          ]
+        },
+        "tool_results": [
+          {
+            "tool_call_id": "g3-s",
+            "name": "search",
+            "content": "{\n  \"abstained\": false,\n  \"hits\": [\n    {\n      \"citation_id\": \"public/products/gadget-lite.md#gadget-lite\",\n      \"title\": \"Gadget Lite\",\n      \"heading\": \"Gadget Lite\",\n      \"score\": 9.197,\n      \"coverage\": 1.0,\n      \"snippet\": \"# >>Gadget<< >>Lite<<\\n\\n>>Gadget<< >>Lite<< is the consumer companion to [[widget-pro]]: smaller \u2026 \",\n      \"lines\": [\n        6,\n        10\n      ]\n    },\n    {\n      \"citation_id\": \"public/products/gadget-lite.md#pricing\",\n      \"title\": \"Gadget Lite\",\n      \"heading\": \"Pricing\",\n      \"score\": 5.971,\n      \"coverage\": 1.0,\n      \"snippet\": \"## Pricing\\n\\n>>Gadget<< >>Lite<< retails at \u00a379. There is no volume discount on \u2026 \",\n      \"lines\": [\n        11,\n        14\n      ]\n    }\n  ]\n}",
+            "is_error": false
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "turn": {
+          "text": "",
+          "stop_reason": "tool_use",
+          "model": "mock",
+          "input_tokens": null,
+          "output_tokens": null,
+          "latency_s": null,
+          "tool_calls": [
+            {
+              "id": "g3-r",
+              "name": "read_note",
+              "input": {
+                "citation": "public/products/gadget-lite.md",
+                "section_only": false
+              }
+            }
+          ]
+        },
+        "tool_results": [
+          {
+            "tool_call_id": "g3-r",
+            "name": "read_note",
+            "content": "{\n  \"found\": true,\n  \"path\": \"public/products/gadget-lite.md\",\n  \"title\": \"Gadget Lite\",\n  \"tags\": [\n    \"gadget\",\n    \"product\"\n  ],\n  \"frontmatter\": {\n    \"title\": \"Gadget Lite\"\n  },\n  \"sections\": [\n    {\n      \"citation_id\": \"public/products/gadget-lite.md#gadget-lite\",\n      \"heading\": \"Gadget Lite\",\n      \"lines\": [\n        6,\n        10\n      ],\n      \"text\": \"# Gadget Lite\\n\\nGadget Lite is the consumer companion to [[widget-pro]]: smaller, quieter, and\\ndesigned for desk use. It comes in three colours (slate, moss, and clay).\"\n    },\n    {\n      \"citation_id\": \"public/products/gadget-lite.md#pricing\",\n      \"heading\": \"Pricing\",\n      \"lines\": [\n        11,\n        14\n      ],\n      \"text\": \"## Pricing\\n\\nGadget Lite retails at \u00a379. There is no volume discount on the consumer line.\"\n    },\n    {\n      \"citation_id\": \"public/products/gadget-lite.md#battery\",\n      \"heading\": \"Battery\",\n      \"lines\": [\n        15,\n        18\n      ],\n      \"text\": \"## Battery\\n\\nThe battery lasts about 14 hours of continuous use and charges over USB-C in\\n90 minutes.\"\n    }\n  ]\n}",
+            "is_error": false
+          }
+        ]
+      },
+      {
+        "index": 2,
+        "turn": {
+          "text": "Gadget Lite comes in slate, moss, and clay.",
+          "stop_reason": "end_turn",
+          "model": "mock",
+          "input_tokens": null,
+          "output_tokens": null,
+          "latency_s": null,
+          "tool_calls": []
+        },
+        "tool_results": []
+      }
+    ]
+  }
+}
