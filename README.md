@@ -10,7 +10,9 @@ Three governing rules, enforced in code rather than documentation:
 2. **Evidence floors.** An eval aggregate over too few runs reports `insufficient`, never a confident number.
 3. **Every gate can fail — and ships with the sabotage test that proves it.**
 
-## Status: v0.1 in build
+![grounded-harness demo: three goldens replayed green, then two sabotages — a broken tool turning the gate red, and a thinned sample triggering the insufficient-evidence refusal](docs/demo.gif)
+
+## Status: v0.1
 
 | Surface | State |
 |---|---|
@@ -19,9 +21,9 @@ Three governing rules, enforced in code rather than documentation:
 | Budgets (step / cost / token ceilings, honest partial results) | ✅ built, tested |
 | Checkpoint / resume (atomic, fail-closed on changed inputs) | ✅ built, tested |
 | Per-turn telemetry JSONL (+ optional OpenTelemetry) | ✅ built |
-| Planner → workers → critic primitives | 🔜 in build |
-| Trajectory evals, golden-run replay, CI gate, sabotage suite | 🔜 in build |
-| Offline demo agent over grounded-mcp's vault | 🔜 in build |
+| Planner → workers → critic primitives | ✅ built, tested |
+| Trajectory evals, golden-run replay, CI gate, sabotage suite | ✅ built, tested (gate fails closed below 3 goldens) |
+| Offline demo agent over grounded-mcp's vault | ✅ `grounded-harness demo` (+ two `--sabotage` modes, both CI-enforced) |
 
 Worth recording: the MCP bridge's **first integration test found a real bug in its sibling** — grounded-mcp v0.1's tools failed over real MCP transport (the SDK runs sync tools on worker threads; SQLite's same-thread default objected), invisible to grounded-mcp's own in-process eval suite. Fixed in grounded-mcp v0.1.1 the same hour. That is the argument for integration-level evals in one sentence.
 
@@ -70,8 +72,11 @@ The server's tools appear in the agent's toolbox with their real schemas; MCP-le
 ## Development
 
 ```bash
-pip install -e ".[dev]"    # dev extra includes mcp + grounded-mcp for the bridge tests
+pip install "git+https://github.com/rich-atkins/grounded-mcp.git"   # bridge/demo dep, not on PyPI
+pip install -e . mcp pytest
 pytest -q
+grounded-harness demo                       # the money demo (offline)
+grounded-harness demo --sabotage broken-tool   # watch the gate go red
 ```
 
 ## The grounded-* family
